@@ -1,11 +1,11 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useEffect, useState, VFC } from "react";
 import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoTable } from "../hooks/memoTable";
 import { memoRegister } from "../hooks/memoRegister";
 import { Box, Input, Radio, RadioGroup, Stack, Textarea } from "@chakra-ui/react";
 
-export const RegisterMemo = () => {
+export const RegisterMemo:VFC = () => {
   const { memoData } = memoTable();
   const [mark, setMark] = useState<number>(0);
   const [date, setDate] = useState("");

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const userAuth = () => {
   const navigate = useNavigate();
-  const login = useCallback(async (email, passWord) => {
+  const login = useCallback(async (email:string, passWord:string) => {
     axios
       .post("https://raisetech-memo-api.herokuapp.com/api/login", {
         email: email,

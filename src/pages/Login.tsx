@@ -1,8 +1,8 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useState, VFC } from "react";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { userAuth } from "../hooks/userAuth";
 
-export const Login = () => {
+export const Login:VFC = () => {
   const [textInput, setTextInput] = useState("");
   const [pass, setPass] = useState("");
   const textChange: ChangeEventHandler<HTMLInputElement> = (e) => {
