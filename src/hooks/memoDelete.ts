@@ -4,7 +4,6 @@ import { axiosInstance } from "../axios/axiosInstance";
 
 export const memoDelete = () => {
   const [loading, setLoading] = useState(false);
-
   const toast = useToast();
   const token = localStorage.getItem("key");
   const deleteInfo = useCallback(async (id: string) => {

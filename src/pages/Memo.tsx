@@ -1,8 +1,10 @@
 import { Box, Button, Input, Stack, Text, Textarea, useDisclosure } from "@chakra-ui/react";
 import { memo, useCallback, useEffect, VFC } from "react";
+import { useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoSelect } from "../hooks/memoSelect";
 import { memoTable } from "../hooks/memoTable";
+import { recoileState } from "../recoile/recoileState";
 import { memoType } from "../types/type1";
 import { EditModal } from "../user/EditModal";
 
@@ -13,14 +15,14 @@ type Props = {
 export const Memo: VFC<Props> = memo((props) => {
   const { loading } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { memoData, memos } = memoTable();
+  const { memoData } = memoTable();
   const { selectedMemo, selectTarget } = memoSelect();
-  
-  
-  
+  const memos = useRecoilValue(recoileState);
+
   useEffect(() => {
     memoData();
-  }, []);
+  }, [memoData]);
+
 
 
 
@@ -47,7 +49,7 @@ export const Memo: VFC<Props> = memo((props) => {
                 <br />
                 <Textarea value={memo.description} readOnly />
                 <br />
-                <Input value={memo.date} readOnly />
+                <Input  value={memo.date} readOnly />
                 <br />
                 <Input value={memo.mark_div === 0 ? "未完了" : "完了"} readOnly />
                 <PrimaryButton onClick={() => onClickOpen(id, memos)}>

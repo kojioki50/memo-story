@@ -16,7 +16,8 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-// import { SingleDatepicker } from "chakra-dayzed-datepicker";
+
+
 import {
   ChangeEventHandler,
   memo,
@@ -29,6 +30,7 @@ import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoDelete } from "../hooks/memoDelete";
 import { memoUpdate } from "../hooks/memoUpdate";
 import { memoType } from "../types/type1";
+
 
 type Props = {
   memo: memoType | null;
@@ -58,12 +60,11 @@ export const EditModal: VFC<Props> = memo((props) => {
   const onChangeDate: ChangeEventHandler<HTMLInputElement> = (e) => {
     setDate(e.target.value);
   };
-  //  const onChangeDate = (e:any) => {
-  //    setDate(e);
-  //  };
+
   const onChangeMark: ChangeEventHandler<HTMLInputElement> = (e) => {
     setMark(e.target.valueAsNumber);
   };
+  
 
   useEffect(() => {
     setTitle(memo?.title ?? "");
@@ -115,12 +116,7 @@ export const EditModal: VFC<Props> = memo((props) => {
             </FormControl>
             <FormControl>
               <FormLabel>日付</FormLabel>
-              <Input type={date} value={date} onChange={onChangeDate} />
-              {/* <SingleDatepicker
-                name="date-input"
-                date={date}
-                onDateChange={onChangeDate}
-              /> */}
+              <Input type="date" value={date} onChange={onChangeDate} />
             </FormControl>
             <FormControl>
               <FormLabel> マークつけるか区分(0:つけない、1:つける)</FormLabel>
