@@ -16,7 +16,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { SingleDatepicker } from "chakra-dayzed-datepicker";
+// import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import {
   ChangeEventHandler,
   memo,
@@ -55,12 +55,12 @@ export const EditModal: VFC<Props> = memo((props) => {
   const onChangeDescription: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setDescription(e.target.value);
   };
-  // const onChangeDate: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-  //   setDate(e.target.value);
-  // };
-   const onChangeDate = (e:any) => {
-     setDate(e);
-   };
+  const onChangeDate: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setDate(e.target.value);
+  };
+  //  const onChangeDate = (e:any) => {
+  //    setDate(e);
+  //  };
   const onChangeMark: ChangeEventHandler<HTMLInputElement> = (e) => {
     setMark(e.target.valueAsNumber);
   };
@@ -115,12 +115,12 @@ export const EditModal: VFC<Props> = memo((props) => {
             </FormControl>
             <FormControl>
               <FormLabel>日付</FormLabel>
-              {/* <Input type={date} value={date} onChange={onChangeDate} /> */}
-              <SingleDatepicker
+              <Input type={date} value={date} onChange={onChangeDate} />
+              {/* <SingleDatepicker
                 name="date-input"
                 date={date}
                 onDateChange={onChangeDate}
-              />
+              /> */}
             </FormControl>
             <FormControl>
               <FormLabel> マークつけるか区分(0:つけない、1:つける)</FormLabel>
