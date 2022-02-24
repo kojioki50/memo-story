@@ -1,14 +1,16 @@
-import { ChangeEventHandler, useEffect, useState, VFC } from "react";
+import { ChangeEventHandler, memo, useCallback, useEffect, useState, VFC } from "react";
 import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoTable } from "../hooks/memoTable";
 import { memoRegister } from "../hooks/memoRegister";
 import { Box, Input, Radio, RadioGroup, Stack, Textarea } from "@chakra-ui/react";
+import { SingleDatepicker } from "chakra-dayzed-datepicker";
 
-export const RegisterMemo:VFC = () => {
+export const RegisterMemo: VFC = memo(() => {
+  const initialDate = new Date();
   const { memoData } = memoTable();
   const [mark, setMark] = useState<number>(0);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<any>(initialDate);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -21,8 +23,8 @@ export const RegisterMemo:VFC = () => {
     setDescription(e.target.value);
   };
 
-  const onClickdate: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setDate(e.target.value);
+  const onChangeDate = (date:Date) => {
+    setDate(date);
   };
   const markChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setMark(e.target.valueAsNumber);
@@ -33,9 +35,9 @@ export const RegisterMemo:VFC = () => {
   }, [memoData]);
 
   const { registerInfo } = memoRegister();
-  const onClickRegister = () => {
+  const onClickRegister = useCallback(() => {
     registerInfo(title, category, description, date, mark);
-  };
+  },[]);
 
   return (
     <>
@@ -54,10 +56,10 @@ export const RegisterMemo:VFC = () => {
           onChange={textChange}
           placeholder="内容"
         ></Textarea>
-        <Input
-          placeholder="20XX/XX/XX/の形式で入力"
-          value={date}
-          onChange={onClickdate}
+        <SingleDatepicker
+          name="date-input"
+          date={date}
+          onDateChange={onChangeDate}
         />
         <Input
           type="number"
@@ -66,10 +68,11 @@ export const RegisterMemo:VFC = () => {
           name="mark"
           onChange={markChange}
           value={mark}
+          placeholder="マークつけるか区分(0:つけない、1:つける)"
         />
         <PrimaryButton onClick={onClickRegister}>登録</PrimaryButton>
         <BackButton></BackButton>
       </Stack>
     </>
   );
-};
+});

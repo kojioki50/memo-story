@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 /* eslint-disable no-empty-pattern */
 /* eslint-disable no-undef */
 import {
@@ -17,6 +16,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
+import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import {
   ChangeEventHandler,
   memo,
@@ -38,14 +38,16 @@ type Props = {
 };
 
 export const EditModal: VFC<Props> = memo((props) => {
+  const initialDate = new Date();
+
   const { memo, isOpen, onClose } = props;
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<any>(initialDate);
   const [mark, setMark] = useState<number | undefined>(0);
-  const { updateInfo } = memoUpdate();
-  const { deleteInfo } = memoDelete();
+  const { updateInfo,load } = memoUpdate();
+  const { deleteInfo,loading } = memoDelete();
 
   const onChangeTitle: ChangeEventHandler<HTMLInputElement> = (e) =>
     setTitle(e.target.value);
@@ -53,9 +55,12 @@ export const EditModal: VFC<Props> = memo((props) => {
   const onChangeDescription: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setDescription(e.target.value);
   };
-  const onChangeDate: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setDate(e.target.value);
-  };
+  // const onChangeDate: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+  //   setDate(e.target.value);
+  // };
+   const onChangeDate = (e:any) => {
+     setDate(e);
+   };
   const onChangeMark: ChangeEventHandler<HTMLInputElement> = (e) => {
     setMark(e.target.valueAsNumber);
   };
@@ -110,10 +115,15 @@ export const EditModal: VFC<Props> = memo((props) => {
             </FormControl>
             <FormControl>
               <FormLabel>日付</FormLabel>
-              <Input value={date} onChange={onChangeDate} />
+              {/* <Input type={date} value={date} onChange={onChangeDate} /> */}
+              <SingleDatepicker
+                name="date-input"
+                date={date}
+                onDateChange={onChangeDate}
+              />
             </FormControl>
             <FormControl>
-              <FormLabel>マーク 0 or 1を半角で記入</FormLabel>
+              <FormLabel> マークつけるか区分(0:つけない、1:つける)</FormLabel>
               <Input
                 type="number"
                 min="0"
@@ -126,16 +136,18 @@ export const EditModal: VFC<Props> = memo((props) => {
         </ModalBody>
         <ModalFooter>
           <PrimaryButton
-            // loading={loading}
+            loading={load}
             onClick={() =>
               onClickUpdate(memo?.id, title, category, description, date, mark)
             }
+            disabled={loading && true}
           >
             更新
           </PrimaryButton>
           <PrimaryButton
-            // loading={loading}
+            loading={loading}
             onClick={() => onClickDelete(memo?.id)}
+            disabled={load && true}
           >
             削除
           </PrimaryButton>

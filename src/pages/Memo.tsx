@@ -1,5 +1,5 @@
 import { Box, Button, Input, Stack, Text, Textarea, useDisclosure } from "@chakra-ui/react";
-import { useCallback, useEffect, VFC } from "react";
+import { memo, useCallback, useEffect, VFC } from "react";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoSelect } from "../hooks/memoSelect";
 import { memoTable } from "../hooks/memoTable";
@@ -10,20 +10,24 @@ type Props = {
   loading: boolean;
 };
 
-export const Memo: VFC<Props> = (props) => {
+export const Memo: VFC<Props> = memo((props) => {
   const { loading } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { memoData, memos } = memoTable();
   const { selectedMemo, selectTarget } = memoSelect();
-
+  
+  
+  
   useEffect(() => {
     memoData();
-  }, [memoData]);
+  }, []);
+
+
 
   const onClickOpen = useCallback((id: string, memos: memoType[] ) => {
     selectedMemo({ id, memos });
     onOpen();
-  }, []);
+  }, [memos]);
 
   return (
     <>
@@ -45,7 +49,7 @@ export const Memo: VFC<Props> = (props) => {
                 <br />
                 <Input value={memo.date} readOnly />
                 <br />
-                <Input value={memo.mark_div} readOnly />
+                <Input value={memo.mark_div === 0 ? "未完了" : "完了"} readOnly />
                 <PrimaryButton onClick={() => onClickOpen(id, memos)}>
                   編集
                 </PrimaryButton>
@@ -67,4 +71,4 @@ export const Memo: VFC<Props> = (props) => {
         </Stack>
     </>
   );
-};
+});

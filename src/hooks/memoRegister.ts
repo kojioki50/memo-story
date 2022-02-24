@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import axios from "axios";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../axios/axiosInstance";
 
 export const memoRegister = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("key");
+
   const registerInfo = useCallback(
     async (
       title: string,
@@ -14,9 +14,9 @@ export const memoRegister = () => {
       date: string,
       mark: number
     ) => {
-      axios
+      axiosInstance
         .post(
-          "https://raisetech-memo-api.herokuapp.com/api/memo",
+          "/memo",
           {
             title,
             category,
@@ -24,11 +24,6 @@ export const memoRegister = () => {
             date,
             mark_div: mark,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
         )
         .then((response) => {
           navigate('/memo');

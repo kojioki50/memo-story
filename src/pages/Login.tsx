@@ -1,8 +1,8 @@
-import { ChangeEventHandler, useState, VFC } from "react";
+import { ChangeEventHandler, memo, useCallback, useState, VFC } from "react";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { userAuth } from "../hooks/userAuth";
 
-export const Login:VFC = () => {
+export const Login:VFC = memo(() => {
   const [textInput, setTextInput] = useState("");
   const [pass, setPass] = useState("");
   const textChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -13,9 +13,9 @@ export const Login:VFC = () => {
   };
   const { login } = userAuth();
 
-  const onClickLogin = () => {
+  const onClickLogin = useCallback(() => {
     login(textInput, pass);
-  };
+},[]);
   return (
     <>
       <input onChange={textChange} value={textInput} placeholder="ユーザーID" />
@@ -28,5 +28,5 @@ export const Login:VFC = () => {
       <PrimaryButton onClick={onClickLogin}>Login</PrimaryButton>
     </>
   );
-};
+});
 

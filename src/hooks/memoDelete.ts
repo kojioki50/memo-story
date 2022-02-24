@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
-import axios from "axios";
 import { useCallback, useState } from "react";
+import { axiosInstance } from "../axios/axiosInstance";
 
 export const memoDelete = () => {
   const [loading, setLoading] = useState(false);
@@ -9,8 +9,8 @@ export const memoDelete = () => {
   const token = localStorage.getItem("key");
   const deleteInfo = useCallback(async (id: string) => {
     setLoading(true);
-    axios
-      .delete(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, {
+    axiosInstance
+      .delete(`/memo/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
