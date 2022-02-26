@@ -1,10 +1,12 @@
-import { useToast } from "@chakra-ui/react";
+import {  useToast } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { axiosInstance } from "../axios/axiosInstance";
+import { memoTable } from "./memoTable";
 
 export const memoDelete = () => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const { memoData } = memoTable();
   const token = localStorage.getItem("key");
   const deleteInfo = useCallback(async (id: string) => {
     setLoading(true);
@@ -21,7 +23,8 @@ export const memoDelete = () => {
         });
         console.log(response);
         setLoading(false);
-        location.reload();
+        memoData();
+
       })
       .catch(() => {
         id ?? alert("IDが不正です");

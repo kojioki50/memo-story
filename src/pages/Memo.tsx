@@ -1,4 +1,4 @@
-import { Box, Button, Input, Stack, Text, Textarea, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Heading, Input, Stack, Text, Textarea, useDisclosure } from "@chakra-ui/react";
 import { memo, useCallback, useEffect, VFC } from "react";
 import { useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
@@ -33,44 +33,137 @@ export const Memo: VFC<Props> = memo((props) => {
 
   return (
     <>
-     <Stack  spacing={5}>
-        <Box fontSize={32}>Memo</Box>
-      <Button as="a" href="/memo/register">新規メモ登録</Button>
-      {memos ? (
-        <Box  >
-          {memos.map((memo) => {
-            const id = memo.id;
-            return (
-              <Box mb={30} bg="skyblue" key={memo.id}>
-                <Input value={memo.id} readOnly></Input>
-                <Input value={memo.title} readOnly />
-                <br />
-                <Input value={memo.category} readOnly />
-                <br />
-                <Textarea value={memo.description} readOnly />
-                <br />
-                <Input  value={memo.date} readOnly />
-                <br />
-                <Input value={memo.mark_div === 0 ? "未完了" : "完了"} readOnly />
-                <PrimaryButton onClick={() => onClickOpen(id, memos)}>
-                  編集
-                </PrimaryButton>
-                <br />
-                <br />
-                <EditModal
-                  isOpen={isOpen}
-                  onClose={onClose}
-                  memo={selectTarget}
-                  loading={loading}
-                />
-              </Box>
-            );
-          })}
-        </Box>
-      ) : (
-        <Text>該当するデータはありません。</Text>
+      <Stack h="100vw" w="100vw" bg="#0363A8" spacing={5}>
+        <Heading pt={3} ml={3} fontSize={{ base: "28px", sm: "32px" }}>
+          Memo
+        </Heading>
+        <Button
+          p="3"
+          fontSize={{ base: "16px", sm: "20px" }}
+          color="#fff"
+          bg="blue.300"
+          _hover={{
+            background: "white",
+            color: "teal.500",
+          }}
+          as="a"
+          href="/memo/register"
+        >
+          新規メモ登録
+        </Button>
+        {memos ? (
+          <Box>
+            {memos.map((memo) => {
+              const id = memo.id;
+              return (
+                <Box color="#333" bg="skyblue" key={memo.id}>
+                  <Box
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt="2"
+                    ml="3"
+                    mt="3"
+                    mb={2}
+                  >
+                    ID
+                  </Box>
+                  <Input
+                    fontSize={{ base: "16px", md: "20px" }}
+                    value={memo.id}
+                    readOnly
+                  ></Input>
+                  <Box
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt="2"
+                    ml="3"
+                    mt="3"
+                    mb={2}
+                  >
+                    タイトル
+                  </Box>
+                  <Input
+                    fontSize={{ base: "16px", md: "20px" }}
+                    value={memo.title}
+                    readOnly
+                  />
+                  <br />
+                  <Box
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt="2"
+                    ml="3"
+                    mt="3"
+                    mb={2}
+                  >
+                    カテゴリー
+                  </Box>
+                  <Input
+                    fontSize={{ base: "16px", md: "20px" }}
+                    value={memo.category}
+                    readOnly
+                  />
+                  <br />
+                  <Box
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt="2"
+                    ml="3"
+                    mt="3"
+                    mb={2}
+                  >
+                    内容
+                  </Box>
+                  <Textarea
+                    fontSize={{ base: "16px", md: "20px" }}
+                    value={memo.description}
+                    readOnly
+                  />
+                  <br />
+                  <Box
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt="2"
+                    ml="3"
+                    mt="3"
+                    mb={2}
+                  >
+                    日付
+                  </Box>
+                  <Input
+                    fontSize={{ base: "16px", md: "20px" }}
+                    value={memo.date}
+                    readOnly
+                  />
+                  <br />
+                  <Box
+                    fontSize={{ base: "16px", md: "20px" }}
+                    pt="2"
+                    ml="3"
+                    mt="3"
+                    mb={2}
+                  >
+                    チェック未完了or完了(0:未完了、1:完了)
+                  </Box>
+                  <Input
+                    fontSize={{ base: "16px", md: "20px" }}
+                    value={memo.mark_div === 0 ? "未完了" : "完了"}
+                    readOnly
+                  />
+                  <PrimaryButton onClick={() => onClickOpen(id, memos)}>
+                    編集
+                  </PrimaryButton>
+                  <br />
+                  <br />
+                  <EditModal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    memo={selectTarget}
+                    loading={loading}
+                  />
+                </Box>
+              );
+            })}
+          </Box>
+        ) : (
+          <Text>該当するデータはありません。</Text>
         )}
-        </Stack>
+      </Stack>
     </>
   );
 });

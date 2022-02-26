@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../axios/axiosInstance";
 
 export const memoRegister = () => {
   const navigate = useNavigate();
+   const [load, setLoad] = useState(false);
 
   const registerInfo = useCallback(
     async (
@@ -14,6 +15,7 @@ export const memoRegister = () => {
       date: string,
       mark: number
     ) => {
+      setLoad(true);
       axiosInstance
         .post(
           "/memo",
@@ -26,6 +28,7 @@ export const memoRegister = () => {
           },
         )
         .then((response) => {
+          setLoad(false);
           navigate('/memo');
           console.log(response);
         })
@@ -35,9 +38,10 @@ export const memoRegister = () => {
             alert("日付の形式が不正です");
           mark !== Number(mark) && alert("マーク区分は数値で入力してください");
           navigate("");
+          setLoad(false);
         });
     },
     []
   );
-  return { registerInfo };
+  return { registerInfo,load,setLoad };
 };

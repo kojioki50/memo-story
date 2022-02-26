@@ -2,22 +2,24 @@
 import { useToast } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { axiosInstance } from "../axios/axiosInstance";
-import { useSetRecoilState } from "recoil";
-import { recoileState } from "../recoile/recoileState";
+// import { useSetRecoilState } from "recoil";
+// import { recoileState } from "../recoile/recoileState";
+import { memoTable } from "./memoTable";
 
 export const memoUpdate = () => {
   const [load, setLoad] = useState(false)
-  const setMemo = useSetRecoilState(recoileState);
+  // const setMemos = useSetRecoilState(recoileState);
+  const { memoData } = memoTable();
   const toast = useToast();
   const token = localStorage.getItem("key");
   const updateInfo = useCallback(
     async (
-      id: string,
+      id: string | undefined,
       title: string,
       category: string,
       description: string,
       date: string,
-      mark: number
+      mark: number | undefined
     ) => {
       setLoad(true);
       axiosInstance
@@ -42,8 +44,8 @@ export const memoUpdate = () => {
             title: "updated",
             duration: 2000,
           });
-          setMemo([response.data]);
-          console.log(setMemo);
+          memoData();
+          // console.log(setMemos);
         })
         .catch(() => {
           id ?? alert("IDが不正です");

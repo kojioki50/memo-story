@@ -3,7 +3,9 @@ import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoTable } from "../hooks/memoTable";
 import { memoRegister } from "../hooks/memoRegister";
-import { Box, Input, Radio, RadioGroup, Stack, Textarea } from "@chakra-ui/react";
+import { Box, Heading, Input, Radio, RadioGroup, Stack, Textarea } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
 
 export const RegisterMemo: VFC = memo(() => {
   const { memoData } = memoTable();
@@ -12,6 +14,9 @@ export const RegisterMemo: VFC = memo(() => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [backBtn, setBackbtn] = useState(false);
+  
+
 
 
   const titleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -33,40 +38,123 @@ export const RegisterMemo: VFC = memo(() => {
     memoData();
   }, [memoData]);
 
-  const { registerInfo } = memoRegister();
+  const { registerInfo,load} = memoRegister();
   const onClickRegister = () => {
     registerInfo(title, category, description, date, mark);
   };
 
+  const navigate = useNavigate();
+  const onClickBack = () => {
+    setBackbtn(true);
+    navigate(-1);
+    };
+
   return (
     <>
-      <Stack spacing={5}>
-        <Box fontSize={32}>RegisterMemo</Box>
-        <Input placeholder="title" value={title} onChange={titleChange} />
-
-        <RadioGroup onChange={setCategory} value={category}>
-          <Stack direction="row">
-            <Radio value="噂話">噂話</Radio>
-            <Radio value="悪口">悪口</Radio>
-          </Stack>
-        </RadioGroup>
-        <Textarea
-          value={description}
-          onChange={textChange}
-          placeholder="内容"
-        ></Textarea>
-        <Input type="date" value={date} onChange={onChangeDate} />
-        <Input
-          type="number"
-          min="0"
-          max="1"
-          name="mark"
-          onChange={markChange}
-          value={mark}
-          placeholder="マークつけるか区分(0:つけない、1:つける)"
-        />
-        <PrimaryButton onClick={onClickRegister}>登録</PrimaryButton>
-        <BackButton></BackButton>
+      <Stack h="100vw" w="100vw" bg="#0363A8" spacing={5}>
+        <Heading pt={3} ml={3} fontSize={{ base: "28px", md: "32px" }}>
+          RegisterMemo
+        </Heading>
+        <Box pb="10" bg="skyblue">
+          <Box
+            fontSize={{ base: "16px", md: "20px" }}
+            pt="2"
+            ml="3"
+            mt="3"
+            mb={2}
+          >
+            タイトル
+          </Box>
+          <Input
+            fontSize={{ base: "16px", md: "20px" }}
+            placeholder="title"
+            value={title}
+            onChange={titleChange}
+          />
+          <Box
+            fontSize={{ base: "16px", md: "20px" }}
+            pt="2"
+            ml="3"
+            mt="3"
+            mb={2}
+          >
+            カテゴリー
+          </Box>
+          <RadioGroup onChange={setCategory} value={category}>
+            <Stack direction="row">
+              <Radio colorScheme="green" size="md" ml={3} value="噂話">
+                噂話
+              </Radio>
+              <Radio colorScheme="green" size="md" value="悪口">
+                悪口
+              </Radio>
+            </Stack>
+          </RadioGroup>
+          <Box
+            fontSize={{ base: "16px", md: "20px" }}
+            mt="3"
+            pt="2"
+            ml="3"
+            mb={2}
+          >
+            内容
+          </Box>
+          <Textarea
+            fontSize={{ base: "16px", md: "20px" }}
+            value={description}
+            onChange={textChange}
+            placeholder="内容"
+          ></Textarea>
+          <Box
+            fontSize={{ base: "16px", md: "20px" }}
+            pt="2"
+            ml="3"
+            mt="3"
+            mb={2}
+          >
+            日付
+          </Box>
+          <Input
+            fontSize={{ base: "16px", md: "20px" }}
+            pr="60%"
+            type="date"
+            value={date}
+            onChange={onChangeDate}
+          />
+          <Box
+            fontSize={{ base: "16px", md: "20px" }}
+            pt="2"
+            ml="3"
+            mt="3"
+            mb={2}
+          >
+            チェック未完了or完了(0:未完了、1:完了)
+          </Box>
+          <Input
+            fontSize={{ base: "16px", md: "20px" }}
+            type="number"
+            min="0"
+            max="1"
+            name="mark"
+            onChange={markChange}
+            value={mark}
+            placeholder="チェック未完了or完了(0:未完了、1:完了)"
+          />
+          <PrimaryButton
+            disabled={(backBtn && true) || load}
+            loading={load}
+            onClick={onClickRegister}
+          >
+            登録
+          </PrimaryButton>
+          <BackButton
+            onClick={onClickBack}
+            loading={backBtn}
+            disabled={(load && true) || backBtn}
+          >
+            戻る
+          </BackButton>
+        </Box>
       </Stack>
     </>
   );
