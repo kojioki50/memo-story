@@ -1,4 +1,13 @@
-import { Box, Button, Heading, Input, Stack, Text, Textarea, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Input,
+  Stack,
+  Text,
+  Textarea,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { memo, useCallback, useEffect, VFC } from "react";
 import { useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
@@ -23,13 +32,13 @@ export const Memo: VFC<Props> = memo((props) => {
     memoData();
   }, [memoData]);
 
-
-
-
-  const onClickOpen = useCallback((id: string, memos: memoType[] ) => {
-    selectedMemo({ id, memos });
-    onOpen();
-  }, [memos]);
+  const onClickOpen = useCallback(
+    (id: string, memos: memoType[]) => {
+      selectedMemo({ id, memos });
+      onOpen();
+    },
+    [memos]
+  );
 
   return (
     <>

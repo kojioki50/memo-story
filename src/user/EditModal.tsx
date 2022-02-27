@@ -19,7 +19,6 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-
 import {
   ChangeEventHandler,
   memo,
@@ -33,8 +32,6 @@ import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoDelete } from "../hooks/memoDelete";
 import { memoUpdate } from "../hooks/memoUpdate";
 import { memoType } from "../types/type1";
-
-
 
 type Props = {
   memo: memoType | null;
@@ -52,8 +49,8 @@ export const EditModal: VFC<Props> = memo((props) => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<any>(initialDate);
   const [mark, setMark] = useState<number | undefined>(0);
-  const { updateInfo,load } = memoUpdate();
-  const { deleteInfo,loading } = memoDelete();
+  const { updateInfo, load } = memoUpdate();
+  const { deleteInfo, loading } = memoDelete();
 
   const onChangeTitle: ChangeEventHandler<HTMLInputElement> = (e) =>
     setTitle(e.target.value);
@@ -78,7 +75,14 @@ export const EditModal: VFC<Props> = memo((props) => {
   }, [memo]);
 
   const onClickUpdate = useCallback(
-    (id:string | undefined, title:string, category:string, description:string, date:string, mark:number | undefined) => {
+    (
+      id: string | undefined,
+      title: string,
+      category: string,
+      description: string,
+      date: string,
+      mark: number | undefined
+    ) => {
       updateInfo(id, title, category, description, date, mark);
     },
     []
@@ -98,7 +102,9 @@ export const EditModal: VFC<Props> = memo((props) => {
     >
       <ModalOverlay />
       <ModalContent pb={5} mb={8}>
-        <ModalHeader pt={2} ml={4}>Memo更新</ModalHeader>
+        <ModalHeader pt={2} ml={4}>
+          Memo更新
+        </ModalHeader>
         <ModalCloseButton></ModalCloseButton>
         <ModalBody mx={4}>
           <Stack spacing={5}>
@@ -137,22 +143,29 @@ export const EditModal: VFC<Props> = memo((props) => {
         </ModalBody>
         <ModalFooter>
           <Container pl={130}>
-          <PrimaryButton
-            loading={load}
-            onClick={() =>
-              onClickUpdate(memo?.id, title, category, description, date, mark)
-            }
-            disabled={(loading && true) || load}
+            <PrimaryButton
+              loading={load}
+              onClick={() =>
+                onClickUpdate(
+                  memo?.id,
+                  title,
+                  category,
+                  description,
+                  date,
+                  mark
+                )
+              }
+              disabled={(loading && true) || load}
             >
-            更新
-          </PrimaryButton>
-          <BackButton
-            loading={loading}
-            onClick={() => onClickDelete(memo?.id)}
-            disabled={(load && true) || loading}
+              更新
+            </PrimaryButton>
+            <BackButton
+              loading={loading}
+              onClick={() => onClickDelete(memo?.id)}
+              disabled={(load && true) || loading}
             >
-            削除
-          </BackButton>
+              削除
+            </BackButton>
           </Container>
         </ModalFooter>
       </ModalContent>

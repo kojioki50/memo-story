@@ -21,7 +21,6 @@ export const memoDelete = () => {
           title: "deleted",
           duration: 2000,
         });
-        console.log(response);
         setLoading(false);
         memoData();
 

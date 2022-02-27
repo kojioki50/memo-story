@@ -1,13 +1,13 @@
-import axios from "axios";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../axios/axiosInstance";
 
 export const userAuth = () => {
   const navigate = useNavigate();
   const login = useCallback(async (email:string, passWord:string) => {
-    axios
-      .post("https://raisetech-memo-api.herokuapp.com/api/login", {
-        email: email,
+    axiosInstance
+      .post("/login", {
+        email,
         password: passWord,
       })
       .then((response) => {

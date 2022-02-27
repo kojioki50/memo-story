@@ -12,8 +12,6 @@ type Props = {
 
 export const BackButton: VFC<Props> = memo((props) => {
   const {children, disabled = false, loading = false, onClick } = props;
-  
-
 
   return (
     <>

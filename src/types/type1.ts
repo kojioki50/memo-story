@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 export type memoType = {
-  id: string ;
+  id: string;
   title: string;
   category: string;
   description: string;

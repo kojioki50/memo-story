@@ -103,7 +103,7 @@ export const RegisterMemo: VFC = memo(() => {
             fontSize={{ base: "16px", md: "20px" }}
             value={description}
             onChange={textChange}
-            placeholder="内容"
+            placeholder="content"
           ></Textarea>
           <Box
             fontSize={{ base: "16px", md: "20px" }}

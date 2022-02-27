@@ -1,14 +1,10 @@
-/* eslint-disable camelcase */
 import { useToast } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { axiosInstance } from "../axios/axiosInstance";
-// import { useSetRecoilState } from "recoil";
-// import { recoileState } from "../recoile/recoileState";
 import { memoTable } from "./memoTable";
 
 export const memoUpdate = () => {
   const [load, setLoad] = useState(false)
-  // const setMemos = useSetRecoilState(recoileState);
   const { memoData } = memoTable();
   const toast = useToast();
   const token = localStorage.getItem("key");
@@ -45,7 +41,6 @@ export const memoUpdate = () => {
             duration: 2000,
           });
           memoData();
-          // console.log(setMemos);
         })
         .catch(() => {
           id ?? alert("IDが不正です");

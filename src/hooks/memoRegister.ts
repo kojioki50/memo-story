@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../axios/axiosInstance";
@@ -30,7 +29,6 @@ export const memoRegister = () => {
         .then((response) => {
           setLoad(false);
           navigate('/memo');
-          console.log(response);
         })
         .catch(() => {
           title === "" && alert("タイトルは必須です");
