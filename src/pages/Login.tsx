@@ -31,7 +31,7 @@ export const Login: VFC = () => {
     <>
       <Flex align="center" justify="center" height="100vh">
         <Box>
-          <Heading ml="20%" mb="5">
+          <Heading ml="25%" mb="5">
             ログイン
           </Heading>
           <Input
