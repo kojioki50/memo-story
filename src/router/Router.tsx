@@ -9,14 +9,14 @@ import { RegisterMemo } from "../pages/RegisterMemo";
 export const Router: VFC = () => {
   return (
     <RecoilRoot>
-    <Routes>
-      <Route path="" element={<Login />} />
-      <Route path="memo">
-        <Route path="" element={<Memo loading />} />
-        <Route path="register" element={<RegisterMemo />} />
-      </Route>
-      <Route path="*" element={<Page404 />} />
-    </Routes>
+      <Routes>
+        <Route path="" element={<Login />} />
+        <Route path="memo">
+          <Route path="" element={<Memo loading />} />
+          <Route path="register" element={<RegisterMemo />} />
+        </Route>
+        <Route path="*" element={<Page404 />} />
+      </Routes>
     </RecoilRoot>
   );
 };

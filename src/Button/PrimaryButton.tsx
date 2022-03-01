@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const PrimaryButton: VFC<Props> = memo((props) => {
-  const {  children, onClick, disabled = false, loading = false } = props;
+  const { children, onClick, disabled = false, loading = false } = props;
   return (
     <>
       <Button

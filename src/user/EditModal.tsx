@@ -41,13 +41,11 @@ type Props = {
 };
 
 export const EditModal: VFC<Props> = memo((props) => {
-  const initialDate = new Date();
-
   const { memo, isOpen, onClose } = props;
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState<any>(initialDate);
+  const [date, setDate] = useState("");
   const [mark, setMark] = useState<number | undefined>(0);
   const { updateInfo, load } = memoUpdate();
   const { deleteInfo, loading } = memoDelete();

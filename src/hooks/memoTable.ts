@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { axiosInstance } from "../axios/axiosInstance";
-import { recoileState } from "../recoile/recoileState";
+import { recoileState } from "../recoil/recoilState";
 import { memoType } from "../types/type1";
 
 

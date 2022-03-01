@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   Heading,
   Input,
   Stack,
@@ -13,7 +14,7 @@ import { useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoSelect } from "../hooks/memoSelect";
 import { memoTable } from "../hooks/memoTable";
-import { recoileState } from "../recoile/recoileState";
+import { recoileState } from "../recoil/recoilState";
 import { memoType } from "../types/type1";
 import { EditModal } from "../user/EditModal";
 
@@ -42,7 +43,8 @@ export const Memo: VFC<Props> = memo((props) => {
 
   return (
     <>
-      <Stack h="100vw" w="100vw" bg="#0363A8" spacing={5}>
+      <Flex height="100%"  justify="center">
+      <Stack bg="#0363A8" spacing={5}>
         <Heading pt={3} ml={3} fontSize={{ base: "28px", sm: "32px" }}>
           Memo
         </Heading>
@@ -172,7 +174,8 @@ export const Memo: VFC<Props> = memo((props) => {
         ) : (
           <Text>該当するデータはありません。</Text>
         )}
-      </Stack>
+        </Stack>
+        </Flex>
     </>
   );
 });

@@ -8,7 +8,6 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import React, { ChangeEventHandler, useState, VFC } from "react";
-// import { PrimaryButton } from "../Button/PrimaryButton";
 import { userAuth } from "../hooks/userAuth";
 
 export const Login: VFC = () => {
@@ -16,13 +15,14 @@ export const Login: VFC = () => {
   const handleClick = () => setShow(!show);
   const [textInput, setTextInput] = useState("");
   const [pass, setPass] = useState("");
+
   const textChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setTextInput(e.target.value);
   };
   const passChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPass(e.target.value);
   };
-  const { login } = userAuth();
+  const { login, loading } = userAuth();
 
   const onClickLogin = () => {
     login(textInput, pass);
@@ -70,6 +70,7 @@ export const Login: VFC = () => {
             </InputRightElement>
           </InputGroup>
           <Button
+            isLoading={loading}
             _hover={{
               background: "white",
               color: "teal.500",
