@@ -14,9 +14,9 @@ export const userAuth = () => {
       })
       .then((response) => {
         setLoading(false);
-        navigate("memo");
         const token = response.data.access_token;
         localStorage.setItem("key", token);
+        navigate("memo");
       })
       .catch(() => {
         alert("ログインできません");

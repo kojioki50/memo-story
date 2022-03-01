@@ -101,7 +101,7 @@ export const EditModal: VFC<Props> = memo((props) => {
       <ModalOverlay />
       <ModalContent pb={5} mb={8}>
         <ModalHeader pt={2} ml={4}>
-          Memo更新
+          Memo編集
         </ModalHeader>
         <ModalCloseButton></ModalCloseButton>
         <ModalBody mx={4}>

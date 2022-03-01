@@ -31,7 +31,8 @@ export const Memo: VFC<Props> = memo((props) => {
 
   useEffect(() => {
     memoData();
-  }, [memoData]);
+  }, []);
+  console.log(memoData)
 
   const onClickOpen = useCallback(
     (id: string, memos: memoType[]) => {

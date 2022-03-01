@@ -6,7 +6,6 @@ import { memoType } from "../types/type1";
 
 
 export const memoTable = () => {
- 
   const [memos, setMemos] = useRecoilState<memoType[]>(recoileState);
   const memoData = useCallback(async () => {
     await axiosInstance

@@ -7,15 +7,10 @@ export const memoDelete = () => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const { memoData } = memoTable();
-  const token = localStorage.getItem("key");
   const deleteInfo = useCallback(async (id: string) => {
     setLoading(true);
     axiosInstance
-      .delete(`/memo/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(`/memo/${id}`)
       .then((response) => {
         toast({
           title: "deleted",

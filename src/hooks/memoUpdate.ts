@@ -7,7 +7,6 @@ export const memoUpdate = () => {
   const [load, setLoad] = useState(false);
   const { memoData } = memoTable();
   const toast = useToast();
-  const token = localStorage.getItem("key");
   const updateInfo = useCallback(
     async (
       id: string | undefined,
@@ -27,11 +26,6 @@ export const memoUpdate = () => {
             description,
             date,
             mark_div: mark,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
           }
         )
         .then((response) => {
