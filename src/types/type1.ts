@@ -5,5 +5,5 @@ export type memoType = {
   category: string;
   description: string;
   date: string;
-  mark_div: number;
+  mark_div: false;
 };

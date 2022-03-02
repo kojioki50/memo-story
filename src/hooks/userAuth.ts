@@ -15,6 +15,7 @@ export const userAuth = () => {
       .then((response) => {
         setLoading(false);
         const token = response.data.access_token;
+        console.log(response.data);
         localStorage.setItem("key", token);
         navigate("memo");
       })

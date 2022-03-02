@@ -1,7 +1,6 @@
-/* eslint-disable no-empty-pattern */
-/* eslint-disable no-undef */
 import {
   Box,
+  Checkbox,
   Container,
   FormControl,
   FormLabel,
@@ -46,7 +45,7 @@ export const EditModal: VFC<Props> = memo((props) => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [mark, setMark] = useState<number | undefined>(0);
+  const [mark, setMark] = useState(false);
   const { updateInfo, load } = memoUpdate();
   const { deleteInfo, loading } = memoDelete();
 
@@ -60,16 +59,12 @@ export const EditModal: VFC<Props> = memo((props) => {
     setDate(e.target.value);
   };
 
-  const onChangeMark: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setMark(e.target.valueAsNumber);
-  };
-
   useEffect(() => {
     setTitle(memo?.title ?? "");
     setCategory(memo?.category ?? "");
     setDescription(memo?.description ?? "");
     setDate(memo?.date ?? "");
-    setMark(memo?.mark_div);
+    setMark(memo?.mark_div ?? false);
   }, [memo]);
 
   const onClickUpdate = useCallback(
@@ -79,7 +74,7 @@ export const EditModal: VFC<Props> = memo((props) => {
       category: string,
       description: string,
       date: string,
-      mark: number | undefined
+      mark: boolean
     ) => {
       updateInfo(id, title, category, description, date, mark);
     },
@@ -90,6 +85,10 @@ export const EditModal: VFC<Props> = memo((props) => {
     deleteInfo(id);
     onClose();
   }, []);
+
+  const onClick = () => {
+    setMark(!mark);
+  };
 
   return (
     <Modal
@@ -128,14 +127,17 @@ export const EditModal: VFC<Props> = memo((props) => {
               <Input type="date" value={date} onChange={onChangeDate} />
             </FormControl>
             <FormControl>
-              <FormLabel> チェック未完了or完了(0:未完了、1:完了)</FormLabel>
-              <Input
+              <FormLabel> チェックマークで完了</FormLabel>
+              {/* <Input
                 type="number"
                 min="0"
                 max="1"
                 value={mark}
                 onChange={onChangeMark}
-              />
+              /> */}
+              <Checkbox isChecked={mark} onChange={onClick}>
+                unchecked or ✔️
+              </Checkbox>
             </FormControl>
           </Stack>
         </ModalBody>

@@ -5,6 +5,7 @@ import { memoTable } from "../hooks/memoTable";
 import { memoRegister } from "../hooks/memoRegister";
 import {
   Box,
+  Checkbox,
   Flex,
   Heading,
   Input,
@@ -17,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 export const RegisterMemo: VFC = memo(() => {
   const { memoData } = memoTable();
-  const [mark, setMark] = useState<number>(0);
+  const [mark, setMark] = useState(false);
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -35,9 +36,9 @@ export const RegisterMemo: VFC = memo(() => {
     setDate(e.target.value);
   };
 
-  const markChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setMark(e.target.valueAsNumber);
-  };
+  // const markChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  //   setMark(e.target.valueAsNumber);
+  // };
 
   useEffect(() => {
     memoData();
@@ -52,6 +53,10 @@ export const RegisterMemo: VFC = memo(() => {
   const onClickBack = () => {
     setBackbtn(true);
     navigate(-1);
+  };
+
+  const onClick = () => {
+    setMark(!mark);
   };
 
   return (
@@ -136,7 +141,7 @@ export const RegisterMemo: VFC = memo(() => {
             >
               チェック未完了or完了(0:未完了、1:完了)
             </Box>
-            <RadioGroup onChange={setCategory} value={category}>
+            {/* <RadioGroup onChange={setCategory} value={category}>
               <Stack direction="row">
                 <Radio colorScheme="green" size="md" ml={3} value="噂話">
                   噂話
@@ -145,8 +150,8 @@ export const RegisterMemo: VFC = memo(() => {
                   悪口
                 </Radio>
               </Stack>
-            </RadioGroup>
-            <Input
+            </RadioGroup> */}
+            {/* <Input
               fontSize={{ base: "16px", md: "20px" }}
               type="number"
               min="0"
@@ -155,17 +160,10 @@ export const RegisterMemo: VFC = memo(() => {
               onChange={markChange}
               value={mark}
               placeholder="チェック未完了or完了(0:未完了、1:完了)"
-            />
-            {/* <RadioGroup onChange={setMark} value={mark}>
-              <Stack direction="row">
-                <Radio colorScheme="green" size="md" ml={3} value="未完了">
-                  未完了
-                </Radio>
-                <Radio colorScheme="green" size="md" value="完了">
-                  完了
-                </Radio>
-              </Stack>
-            </RadioGroup> */}
+            /> */}
+            <Checkbox isChecked={mark} onChange={onClick}>
+              チェック未完了or完了
+            </Checkbox>
             <PrimaryButton
               disabled={(backBtn && true) || load}
               loading={load}
