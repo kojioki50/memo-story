@@ -34,9 +34,7 @@ export const Memo: VFC<Props> = memo((props) => {
   }, []);
 
   const onClickOpen = useCallback((id: string, memos: memoType[]) => {
-    selectedMemo({ id, memos });
-    onOpen();
-    console.log(onOpen);
+    selectedMemo({ id, memos, onOpen });
   }, []);
 
   return (
@@ -163,19 +161,19 @@ export const Memo: VFC<Props> = memo((props) => {
                     </PrimaryButton>
                     <br />
                     <br />
-                    <EditModal
-                      isOpen={isOpen}
-                      onClose={onClose}
-                      memo={selectTarget}
-                      loading={loading}
-                    />
                   </Box>
                 );
               })}
             </Box>
           ) : (
             <Text>該当するデータはありません。</Text>
-          )}
+            )}
+            <EditModal
+              isOpen={isOpen}
+              onClose={onClose}
+              memo={selectTarget}
+              loading={loading}
+            />
         </Stack>
       </Flex>
     </>
