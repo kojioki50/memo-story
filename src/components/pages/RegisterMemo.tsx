@@ -1,10 +1,11 @@
 import { ChangeEventHandler, memo, useEffect, useState, VFC } from "react";
 import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
-import { memoTable } from "../hooks/memoTable";
-import { memoRegister } from "../hooks/memoRegister";
+import { memoTable } from "../../hooks/memoTable";
+import { memoRegister } from "../../hooks/memoRegister";
 import {
   Box,
+  Button,
   Checkbox,
   Flex,
   Heading,
@@ -59,12 +60,24 @@ export const RegisterMemo: VFC = memo(() => {
     setMark(!mark);
   };
 
+  const onClickOut = () => {
+    localStorage.removeItem("key");
+    navigate("/");
+  };
+
   return (
     <>
       <Flex height="100vh" justify="center">
         <Stack bg="#0363A8" spacing={5}>
           <Heading pt={3} ml={3} fontSize={{ base: "28px", md: "32px" }}>
             RegisterMemo
+            <Button
+              onClick={onClickOut}
+              fontSize={{ base: "8px", sm: "12px" }}
+              ml={6}
+            >
+              ログアウト
+            </Button>
           </Heading>
           <Box pb="10" bg="skyblue">
             <Box

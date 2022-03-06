@@ -28,9 +28,9 @@ import {
 } from "react";
 import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
-import { memoDelete } from "../hooks/memoDelete";
-import { memoUpdate } from "../hooks/memoUpdate";
-import { memoType } from "../types/type1";
+import { memoDelete } from "../../hooks/memoDelete";
+import { memoUpdate } from "../../hooks/memoUpdate";
+import { memoType } from "../../types/type1";
 
 type Props = {
   memo: memoType | null;

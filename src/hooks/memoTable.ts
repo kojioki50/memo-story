@@ -1,11 +1,17 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { axiosInstance } from "../axios/axiosInstance";
+import { axiosInstance } from "../libs/axios/axiosInstance";
 import { recoileState } from "../recoil/recoilState";
 import { memoType } from "../types/type1";
 
+interface AxiosResponse<T> {
+  data: T;
+}
+
 export const memoTable = () => {
   const token = localStorage.getItem("key");
+  const navigate = useNavigate();
   const [memos, setMemos] = useRecoilState<memoType[]>(recoileState);
   const memoData = useCallback(async () => {
     await axiosInstance
@@ -14,19 +20,13 @@ export const memoTable = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        // for(let i=0; i<=response.data.length; i++) {
-        //   if(response.data.mark_div === 0 ) {
-        //     response.data[i].mark_div = false ;
-        // response.data[i].setItem("mark_div", false);
-        //   }else {
-        //     response.data[i].mark_div = true ;
-        //   }
-        // }
+      .then((response:AxiosResponse<memoType[]>) => {
+        console.log(response);
         setMemos(response.data);
       })
-      .catch(() => {
-        console.log("error");
+      .catch((error) => {
+        alert(error.response.data);
+        navigate("/");
       });
   }, []);
   return { memoData, memos, setMemos };

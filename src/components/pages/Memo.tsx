@@ -12,11 +12,12 @@ import {
 import { memo, useCallback, useEffect, VFC } from "react";
 import { useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
-import { memoSelect } from "../hooks/memoSelect";
-import { memoTable } from "../hooks/memoTable";
-import { recoileState } from "../recoil/recoilState";
-import { memoType } from "../types/type1";
-import { EditModal } from "../user/EditModal";
+import { memoSelect } from "../../hooks/memoSelect";
+import { memoTable } from "../../hooks/memoTable";
+import { recoileState } from "../../recoil/recoilState";
+import { memoType } from "../../types/type1";
+import { EditModal } from "../modal/EditModal";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   loading: boolean;
@@ -28,6 +29,7 @@ export const Memo: VFC<Props> = memo((props) => {
   const { memoData } = memoTable();
   const { selectedMemo, selectTarget } = memoSelect();
   const memos = useRecoilValue(recoileState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     memoData();
@@ -37,12 +39,20 @@ export const Memo: VFC<Props> = memo((props) => {
     selectedMemo({ id, memos, onOpen });
   }, []);
 
+  const onClickOut = () => {
+    localStorage.removeItem("key")
+    navigate("/");
+  }
+
   return (
     <>
       <Flex height="100%" justify="center">
         <Stack bg="#0363A8" spacing={5}>
           <Heading pt={3} ml={3} fontSize={{ base: "28px", sm: "32px" }}>
             Memo
+            <Button onClick={onClickOut} fontSize={{ base: "8px", sm: "12px" }} ml={6}>
+              ログアウト
+            </Button>
           </Heading>
           <Button
             p="3"
@@ -167,13 +177,13 @@ export const Memo: VFC<Props> = memo((props) => {
             </Box>
           ) : (
             <Text>該当するデータはありません。</Text>
-            )}
-            <EditModal
-              isOpen={isOpen}
-              onClose={onClose}
-              memo={selectTarget}
-              loading={loading}
-            />
+          )}
+          <EditModal
+            isOpen={isOpen}
+            onClose={onClose}
+            memo={selectTarget}
+            loading={loading}
+          />
         </Stack>
       </Flex>
     </>

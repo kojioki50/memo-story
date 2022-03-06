@@ -8,7 +8,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import React, { ChangeEventHandler, useState, VFC } from "react";
-import { userAuth } from "../hooks/userAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login: VFC = () => {
   const [show, setShow] = React.useState(false);
@@ -22,7 +22,7 @@ export const Login: VFC = () => {
   const passChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPass(e.target.value);
   };
-  const { login, loading } = userAuth();
+  const { login, loading } = useAuth();
 
   const onClickLogin = () => {
     login(textInput, pass);

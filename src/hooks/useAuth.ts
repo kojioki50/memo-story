@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../axios/axiosInstance";
+import { axiosInstance } from "../libs/axios/axiosInstance";
 
-export const userAuth = () => {
+export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const login = useCallback(async (email: string, passWord: string) => {

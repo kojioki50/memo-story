@@ -1,7 +1,12 @@
-import {  useToast } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
-import { axiosInstance } from "../axios/axiosInstance";
+import { axiosInstance } from "../libs/axios/axiosInstance";
+import { memoType } from "../types/type1";
 import { memoTable } from "./memoTable";
+
+interface AxiosResponse<T> {
+  data: T;
+}
 
 export const memoDelete = () => {
   const [loading, setLoading] = useState(false);
@@ -11,17 +16,17 @@ export const memoDelete = () => {
     setLoading(true);
     axiosInstance
       .delete(`/memo/${id}`)
-      .then((response) => {
+      .then((response: AxiosResponse<memoType[]>) => {
         toast({
           title: "deleted",
           duration: 2000,
         });
-        setLoading(false);
         memoData();
-
       })
-      .catch(() => {
-        id ?? alert("IDが不正です");
+      .catch((error) => {
+        alert(error.response.data);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
