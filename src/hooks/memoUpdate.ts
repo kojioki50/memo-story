@@ -38,7 +38,7 @@ export const memoUpdate = () => {
           memoData();
         })
         .catch((error) => {
-          alert(error.response.data);
+          alert(error.response.data.message);
         })
         .finally(() => {
           setLoad(false);

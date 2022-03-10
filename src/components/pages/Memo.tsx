@@ -14,7 +14,7 @@ import { useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoSelect } from "../../hooks/memoSelect";
 import { memoTable } from "../../hooks/memoTable";
-import { recoileState } from "../../recoil/recoilState";
+import { loginUserState } from "../../recoil/recoilState";
 import { memoType } from "../../types/type1";
 import { EditModal } from "../modal/EditModal";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ export const Memo: VFC<Props> = memo((props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { memoData } = memoTable();
   const { selectedMemo, selectTarget } = memoSelect();
-  const memos = useRecoilValue(recoileState);
+  const memos = useRecoilValue(loginUserState);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,9 +40,9 @@ export const Memo: VFC<Props> = memo((props) => {
   }, []);
 
   const onClickOut = () => {
-    localStorage.removeItem("key")
+    localStorage.removeItem("key");
     navigate("/");
-  }
+  };
 
   return (
     <>
@@ -50,7 +50,11 @@ export const Memo: VFC<Props> = memo((props) => {
         <Stack bg="#0363A8" spacing={5}>
           <Heading pt={3} ml={3} fontSize={{ base: "28px", sm: "32px" }}>
             Memo
-            <Button onClick={onClickOut} fontSize={{ base: "8px", sm: "12px" }} ml={6}>
+            <Button
+              onClick={onClickOut}
+              fontSize={{ base: "8px", sm: "12px" }}
+              ml={6}
+            >
               ログアウト
             </Button>
           </Heading>
@@ -158,11 +162,7 @@ export const Memo: VFC<Props> = memo((props) => {
                     >
                       チェックマークで完了
                     </Box>
-                    {/* <Input
-                    fontSize={{ base: "16px", md: "20px" }}
-                    value={memo.mark_div === 0 ? "未完了" : "完了"}
-                    readOnly
-                  /> */}
+
                     <Box fontSize={{ base: "16px", md: "20px" }} ml="5">
                       {mark === false ? "unchecked" : "✔️"}
                     </Box>

@@ -21,11 +21,10 @@ export const useAuth = () => {
       })
       .catch(() => {
         alert("ログインできません");
-        setLoading(false);
         navigate("");
       })
       .finally(() => {
-        console.log("OK");
+        setLoading(false);
       });
   }, []);
   return { login, loading };

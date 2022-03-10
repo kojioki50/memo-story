@@ -24,7 +24,7 @@ export const memoDelete = () => {
         memoData();
       })
       .catch((error) => {
-        alert(error.response.data);
+        alert(error.response.data.message);
       })
       .finally(() => {
         setLoading(false);

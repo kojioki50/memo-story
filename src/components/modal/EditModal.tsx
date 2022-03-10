@@ -128,13 +128,7 @@ export const EditModal: VFC<Props> = memo((props) => {
             </FormControl>
             <FormControl>
               <FormLabel> チェックマークで完了</FormLabel>
-              {/* <Input
-                type="number"
-                min="0"
-                max="1"
-                value={mark}
-                onChange={onChangeMark}
-              /> */}
+
               <Checkbox isChecked={mark} onChange={onClick}>
                 unchecked or ✔️
               </Checkbox>

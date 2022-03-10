@@ -154,27 +154,8 @@ export const RegisterMemo: VFC = memo(() => {
             >
               チェック未完了or完了(0:未完了、1:完了)
             </Box>
-            {/* <RadioGroup onChange={setCategory} value={category}>
-              <Stack direction="row">
-                <Radio colorScheme="green" size="md" ml={3} value="噂話">
-                  噂話
-                </Radio>
-                <Radio colorScheme="green" size="md" value="悪口">
-                  悪口
-                </Radio>
-              </Stack>
-            </RadioGroup> */}
-            {/* <Input
-              fontSize={{ base: "16px", md: "20px" }}
-              type="number"
-              min="0"
-              max="1"
-              name="mark"
-              onChange={markChange}
-              value={mark}
-              placeholder="チェック未完了or完了(0:未完了、1:完了)"
-            /> */}
-            <Checkbox isChecked={mark} onChange={onClick}>
+
+            <Checkbox ml="3" isChecked={mark} onChange={onClick}>
               チェック未完了or完了
             </Checkbox>
             <PrimaryButton
