@@ -1,10 +1,13 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../libs/axios/axiosInstance";
+import { loginInfoProvider } from "./LoginProvider";
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setLoginInfo } = loginInfoProvider();
+
   const login = useCallback(async (email: string, passWord: string) => {
     setLoading(true);
     axiosInstance
@@ -13,10 +16,10 @@ export const useAuth = () => {
         password: passWord,
       })
       .then((response) => {
-        setLoading(false);
         const token = response.data.access_token;
-        console.log(response.data);
+        setLoginInfo(true);
         localStorage.setItem("key", token);
+        setLoading(false);
         navigate("memo");
       })
       .catch(() => {

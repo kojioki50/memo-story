@@ -1,7 +1,6 @@
-import { ChangeEventHandler, memo, useEffect, useState, VFC } from "react";
+import { ChangeEventHandler, memo, useState, VFC } from "react";
 import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
-import { memoTable } from "../../hooks/memoTable";
 import { memoRegister } from "../../hooks/memoRegister";
 import {
   Box,
@@ -18,7 +17,6 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export const RegisterMemo: VFC = memo(() => {
-  const { memoData } = memoTable();
   const [mark, setMark] = useState(false);
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
@@ -37,14 +35,6 @@ export const RegisterMemo: VFC = memo(() => {
     setDate(e.target.value);
   };
 
-  // const markChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-  //   setMark(e.target.valueAsNumber);
-  // };
-
-  useEffect(() => {
-    memoData();
-  }, [memoData]);
-
   const { registerInfo, load } = memoRegister();
   const onClickRegister = () => {
     registerInfo(title, category, description, date, mark);
@@ -62,6 +52,7 @@ export const RegisterMemo: VFC = memo(() => {
 
   const onClickOut = () => {
     localStorage.removeItem("key");
+    localStorage.removeItem("auth");
     navigate("/");
   };
 
