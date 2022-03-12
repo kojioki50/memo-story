@@ -30,7 +30,7 @@ export const memoUpdate = () => {
           date,
           mark_div: Number(mark),
         })
-        .then((rresponse: AxiosResponse<memoType[]>) => {
+        .then((response: AxiosResponse<memoType[]>) => {
           toast({
             title: "updated",
             duration: 2000,
