@@ -15,16 +15,13 @@ interface AxiosResponse<T> {
 
 export const memoTable = () => {
   // const navigate = useNavigate();
-  const token = localStorage.getItem("key");
    const {setLoginInfo, loginInfo } = loginInfoProvider();
   localStorage.setItem("auth", JSON.stringify(loginInfo));
   const setMemos = useSetRecoilState<memoType[]>(loginUserState);
   const memoData = useCallback(async () => {
     await axiosInstance
       .get("/memos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+       
       })
       .then((response: AxiosResponse<memoType[]>) => {
         setMemos(response.data);
