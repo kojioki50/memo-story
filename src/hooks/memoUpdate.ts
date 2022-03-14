@@ -12,6 +12,7 @@ export const memoUpdate = () => {
   const [load, setLoad] = useState(false);
   const { memoData } = memoTable();
   const toast = useToast();
+  const { instance } = axiosInstance();
   const updateInfo = useCallback(
     async (
       id: string | undefined,
@@ -22,7 +23,7 @@ export const memoUpdate = () => {
       mark: boolean
     ) => {
       setLoad(true);
-      axiosInstance
+      instance
         .put(`/memo/${id}`, {
           title,
           category,

@@ -10,6 +10,7 @@ interface AxiosResponse<T> {
 export const memoRegister = () => {
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
+  const { instance } = axiosInstance();
 
   const registerInfo = useCallback(
     async (
@@ -20,7 +21,7 @@ export const memoRegister = () => {
       mark: boolean
     ) => {
       setLoad(true);
-      axiosInstance
+      instance
         .post("/memo", {
           title,
           category,

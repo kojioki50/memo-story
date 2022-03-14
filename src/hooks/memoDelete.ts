@@ -12,9 +12,10 @@ export const memoDelete = () => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const { memoData } = memoTable();
+  const { instance } = axiosInstance();
   const deleteInfo = useCallback(async (id: string) => {
     setLoading(true);
-    axiosInstance
+    instance
       .delete(`/memo/${id}`)
       .then((response: AxiosResponse<memoType[]>) => {
         toast({

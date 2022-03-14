@@ -53,7 +53,6 @@ export const Memo: VFC<Props> = memo((props) => {
   }, []);
 
   const onClickRegister = useCallback(() => {
-    setLoginInfo(true);
     navigate("/memo/register");
   }, []);
 
