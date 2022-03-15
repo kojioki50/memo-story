@@ -29,6 +29,10 @@ export const memoDelete = () => {
       })
       .finally(() => {
         setLoading(false);
+        setTimeout(function () {
+          window.location.reload();
+
+        }, 1000);
       });
   }, []);
   return { deleteInfo, loading };

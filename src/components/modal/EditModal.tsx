@@ -83,7 +83,6 @@ export const EditModal: VFC<Props> = memo((props) => {
 
   const onClickDelete = useCallback((id) => {
     deleteInfo(id);
-    onClose();
   }, []);
 
   const onClick = () => {
