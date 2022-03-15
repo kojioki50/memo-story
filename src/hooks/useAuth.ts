@@ -5,22 +5,24 @@ import { axiosInstance } from "../libs/axios/axiosInstance";
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { instance } = axiosInstance();
+  
   const login = useCallback(async (email: string, passWord: string) => {
     setLoading(true);
-    axiosInstance
-      .post("/login", {
-        email,
-        password: passWord,
-      })
-      .then((response) => {
-        setLoading(false);
-        const token = response.data.access_token;
-        console.log(response.data);
-        localStorage.setItem("key", token);
-        navigate("memo");
-      })
-      .catch(() => {
-        alert("ログインできません");
+    instance
+    .post("/login", {
+      email,
+      password: passWord,
+    })
+    .then((response) => {
+      localStorage.setItem("auth", JSON.stringify(<boolean>true));
+      const token = response.data.access_token;
+      localStorage.setItem("key", token);
+      setLoading(false);
+      navigate("memo");
+    })
+    .catch(() => {
+      alert("ログインできません");
         navigate("");
       })
       .finally(() => {

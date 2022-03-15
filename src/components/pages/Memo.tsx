@@ -18,6 +18,7 @@ import { loginUserState } from "../../recoil/recoilState";
 import { memoType } from "../../types/type1";
 import { EditModal } from "../modal/EditModal";
 import { useNavigate } from "react-router-dom";
+import { loginInfoProvider } from "../../hooks/LoginProvider";
 
 type Props = {
   loading: boolean;
@@ -30,6 +31,11 @@ export const Memo: VFC<Props> = memo((props) => {
   const { selectedMemo, selectTarget } = memoSelect();
   const memos = useRecoilValue(loginUserState);
   const navigate = useNavigate();
+  const {setLoginInfo } = loginInfoProvider();
+
+
+   
+
 
   useEffect(() => {
     memoData();
@@ -39,10 +45,16 @@ export const Memo: VFC<Props> = memo((props) => {
     selectedMemo({ id, memos, onOpen });
   }, []);
 
-  const onClickOut = () => {
+  const onClickOut = useCallback(() => {
     localStorage.removeItem("key");
+    localStorage.removeItem("auth");
+    setLoginInfo(false);
     navigate("/");
-  };
+  }, []);
+
+  const onClickRegister = useCallback(() => {
+    navigate("/memo/register");
+  }, []);
 
   return (
     <>
@@ -67,8 +79,7 @@ export const Memo: VFC<Props> = memo((props) => {
               background: "white",
               color: "teal.500",
             }}
-            as="a"
-            href="/memo/register"
+            onClick={onClickRegister}
           >
             新規メモ登録
           </Button>
