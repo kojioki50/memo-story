@@ -1,6 +1,8 @@
 import { useToast } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
+import { useSetRecoilState } from "recoil";
 import { axiosInstance } from "../libs/axios/axiosInstance";
+import { modalOpenState } from "../recoil/recoilState";
 import { memoType } from "../types/type1";
 import { memoTable } from "./memoTable";
 
@@ -13,6 +15,7 @@ export const memoDelete = () => {
   const toast = useToast();
   const { memoData } = memoTable();
   const { instance } = axiosInstance();
+  const setModalOpen = useSetRecoilState(modalOpenState);
   const deleteInfo = useCallback(async (id: string) => {
     setLoading(true);
     instance
@@ -29,10 +32,8 @@ export const memoDelete = () => {
       })
       .finally(() => {
         setLoading(false);
-        setTimeout(function () {
-          window.location.reload();
 
-        }, 1000);
+        setModalOpen(false);
       });
   }, []);
   return { deleteInfo, loading };

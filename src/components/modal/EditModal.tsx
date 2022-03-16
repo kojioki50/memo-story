@@ -31,6 +31,8 @@ import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoDelete } from "../../hooks/memoDelete";
 import { memoUpdate } from "../../hooks/memoUpdate";
 import { memoType } from "../../types/type1";
+import { useRecoilValue } from "recoil";
+import { modalOpenState } from "../../recoil/recoilState";
 
 type Props = {
   memo: memoType | null;
@@ -40,7 +42,7 @@ type Props = {
 };
 
 export const EditModal: VFC<Props> = memo((props) => {
-  const { memo, isOpen, onClose } = props;
+  const { memo, onClose } = props;
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -48,6 +50,8 @@ export const EditModal: VFC<Props> = memo((props) => {
   const [mark, setMark] = useState(false);
   const { updateInfo, load } = memoUpdate();
   const { deleteInfo, loading } = memoDelete();
+  const modalOpen = useRecoilValue(modalOpenState);
+  // const modalClose = useRecoilValue(modalCloseState);
 
   const onChangeTitle: ChangeEventHandler<HTMLInputElement> = (e) =>
     setTitle(e.target.value);
@@ -91,7 +95,7 @@ export const EditModal: VFC<Props> = memo((props) => {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={modalOpen}
       onClose={onClose}
       autoFocus={false}
       motionPreset="slideInRight"
@@ -106,29 +110,50 @@ export const EditModal: VFC<Props> = memo((props) => {
           <Stack spacing={5}>
             <FormControl>
               <FormLabel>タイトル</FormLabel>
-              <Input value={title} onChange={onChangeTitle} />
+              <Input
+                disabled={(load && true) || loading}
+                value={title}
+                onChange={onChangeTitle}
+              />
             </FormControl>
 
             <RadioGroup onChange={setCategory} value={category}>
               <Box mb={2}>カテゴリー</Box>
               <Stack direction="row">
-                <Radio value="噂話">噂話</Radio>
-                <Radio value="悪口">悪口</Radio>
+                <Radio isDisabled={(load && true) || loading} value="噂話">
+                  噂話
+                </Radio>
+                <Radio isDisabled={(load && true) || loading} value="悪口">
+                  悪口
+                </Radio>
               </Stack>
             </RadioGroup>
 
             <FormControl>
               <FormLabel>内容</FormLabel>
-              <Textarea value={description} onChange={onChangeDescription} />
+              <Textarea
+                disabled={(load && true) || loading}
+                value={description}
+                onChange={onChangeDescription}
+              />
             </FormControl>
             <FormControl>
               <FormLabel>日付</FormLabel>
-              <Input type="date" value={date} onChange={onChangeDate} />
+              <Input
+                disabled={(load && true) || loading}
+                type="date"
+                value={date}
+                onChange={onChangeDate}
+              />
             </FormControl>
             <FormControl>
               <FormLabel> チェックマークで完了</FormLabel>
 
-              <Checkbox isChecked={mark} onChange={onClick}>
+              <Checkbox
+                isDisabled={(load && true) || loading}
+                isChecked={mark}
+                onChange={onClick}
+              >
                 unchecked or ✔️
               </Checkbox>
             </FormControl>

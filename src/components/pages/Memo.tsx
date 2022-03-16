@@ -10,11 +10,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { memo, useCallback, useEffect, VFC } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoSelect } from "../../hooks/memoSelect";
 import { memoTable } from "../../hooks/memoTable";
-import { loginUserState } from "../../recoil/recoilState";
+import { loginUserState, modalOpenState } from "../../recoil/recoilState";
 import { memoType } from "../../types/type1";
 import { EditModal } from "../modal/EditModal";
 import { useNavigate } from "react-router-dom";
@@ -26,22 +26,20 @@ type Props = {
 
 export const Memo: VFC<Props> = memo((props) => {
   const { loading } = props;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
   const { memoData } = memoTable();
   const { selectedMemo, selectTarget } = memoSelect();
   const memos = useRecoilValue(loginUserState);
   const navigate = useNavigate();
-  const {setLoginInfo } = loginInfoProvider();
-
-
-   
-
+  const { setLoginInfo } = loginInfoProvider();
+  const [modalOpen, setModalOpen] = useRecoilState(modalOpenState);
 
   useEffect(() => {
     memoData();
   }, []);
 
   const onClickOpen = useCallback((id: string, memos: memoType[]) => {
+    setModalOpen(true);
     selectedMemo({ id, memos, onOpen });
   }, []);
 
@@ -54,6 +52,10 @@ export const Memo: VFC<Props> = memo((props) => {
 
   const onClickRegister = useCallback(() => {
     navigate("/memo/register");
+  }, []);
+
+  const onClickModal = useCallback(() => {
+    setModalOpen(false);
   }, []);
 
   return (
@@ -190,8 +192,8 @@ export const Memo: VFC<Props> = memo((props) => {
             <Text>該当するデータはありません。</Text>
           )}
           <EditModal
-            isOpen={isOpen}
-            onClose={onClose}
+            isOpen={modalOpen}
+            onClose={onClickModal}
             memo={selectTarget}
             loading={loading}
           />
