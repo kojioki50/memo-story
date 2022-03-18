@@ -14,11 +14,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoSelect } from "../../hooks/memoSelect";
 import { memoTable } from "../../hooks/memoTable";
-import { loginUserState, modalOpenState } from "../../recoil/recoilState";
+import { memosState, modalOpenState } from "../../recoil/recoilState";
 import { memoType } from "../../types/type1";
 import { EditModal } from "../modal/EditModal";
 import { useNavigate } from "react-router-dom";
 import { loginInfoProvider } from "../../hooks/LoginProvider";
+
 
 type Props = {
   loading: boolean;
@@ -29,10 +30,11 @@ export const Memo: VFC<Props> = memo((props) => {
   const { onOpen } = useDisclosure();
   const { memoData } = memoTable();
   const { selectedMemo, selectTarget } = memoSelect();
-  const memos = useRecoilValue(loginUserState);
+  const memos = useRecoilValue(memosState);
   const navigate = useNavigate();
   const { setLoginInfo } = loginInfoProvider();
   const [modalOpen, setModalOpen] = useRecoilState(modalOpenState);
+
 
   useEffect(() => {
     memoData();

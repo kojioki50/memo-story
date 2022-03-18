@@ -31,8 +31,8 @@ import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoDelete } from "../../hooks/memoDelete";
 import { memoUpdate } from "../../hooks/memoUpdate";
 import { memoType } from "../../types/type1";
-import { useRecoilValue } from "recoil";
-import { modalOpenState } from "../../recoil/recoilState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { modalOpenState,  modalOverlayState } from "../../recoil/recoilState";
 
 type Props = {
   memo: memoType | null;
@@ -42,16 +42,16 @@ type Props = {
 };
 
 export const EditModal: VFC<Props> = memo((props) => {
-  const { memo, onClose } = props;
+  const { memo, onClose} = props;
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [mark, setMark] = useState(false);
   const { updateInfo, load } = memoUpdate();
-  const { deleteInfo, loading } = memoDelete();
+  const { deleteInfo, loaded } = memoDelete();
   const modalOpen = useRecoilValue(modalOpenState);
-  // const modalClose = useRecoilValue(modalCloseState);
+  const [modalOverlay, setModalOverlay] = useRecoilState(modalOverlayState);
 
   const onChangeTitle: ChangeEventHandler<HTMLInputElement> = (e) =>
     setTitle(e.target.value);
@@ -86,6 +86,7 @@ export const EditModal: VFC<Props> = memo((props) => {
   );
 
   const onClickDelete = useCallback((id) => {
+    setModalOverlay(false)
     deleteInfo(id);
   }, []);
 
@@ -99,6 +100,7 @@ export const EditModal: VFC<Props> = memo((props) => {
       onClose={onClose}
       autoFocus={false}
       motionPreset="slideInRight"
+      closeOnOverlayClick={modalOverlay}
     >
       <ModalOverlay />
       <ModalContent pb={5} mb={8}>
@@ -111,7 +113,7 @@ export const EditModal: VFC<Props> = memo((props) => {
             <FormControl>
               <FormLabel>タイトル</FormLabel>
               <Input
-                disabled={(load && true) || loading}
+                disabled={(load && true) || loaded}
                 value={title}
                 onChange={onChangeTitle}
               />
@@ -120,10 +122,10 @@ export const EditModal: VFC<Props> = memo((props) => {
             <RadioGroup onChange={setCategory} value={category}>
               <Box mb={2}>カテゴリー</Box>
               <Stack direction="row">
-                <Radio isDisabled={(load && true) || loading} value="噂話">
+                <Radio isDisabled={(load && true) || loaded} value="噂話">
                   噂話
                 </Radio>
-                <Radio isDisabled={(load && true) || loading} value="悪口">
+                <Radio isDisabled={(load && true) || loaded} value="悪口">
                   悪口
                 </Radio>
               </Stack>
@@ -132,7 +134,7 @@ export const EditModal: VFC<Props> = memo((props) => {
             <FormControl>
               <FormLabel>内容</FormLabel>
               <Textarea
-                disabled={(load && true) || loading}
+                disabled={(load && true) || loaded}
                 value={description}
                 onChange={onChangeDescription}
               />
@@ -140,7 +142,7 @@ export const EditModal: VFC<Props> = memo((props) => {
             <FormControl>
               <FormLabel>日付</FormLabel>
               <Input
-                disabled={(load && true) || loading}
+                disabled={(load && true) || loaded}
                 type="date"
                 value={date}
                 onChange={onChangeDate}
@@ -150,7 +152,7 @@ export const EditModal: VFC<Props> = memo((props) => {
               <FormLabel> チェックマークで完了</FormLabel>
 
               <Checkbox
-                isDisabled={(load && true) || loading}
+                isDisabled={(load && true) || loaded}
                 isChecked={mark}
                 onChange={onClick}
               >
@@ -173,14 +175,14 @@ export const EditModal: VFC<Props> = memo((props) => {
                   mark
                 )
               }
-              disabled={(loading && true) || load}
+              disabled={(loaded && true) || load}
             >
               更新
             </PrimaryButton>
             <BackButton
-              loading={loading}
+              loading={loaded}
               onClick={() => onClickDelete(memo?.id)}
-              disabled={(load && true) || loading}
+              disabled={(load && true) || loaded}
             >
               削除
             </BackButton>
