@@ -7,11 +7,11 @@ export const memosState = atom<memoType[]>({
 });
 
 export const modalOpenState = atom<boolean>({
-  key: "MODAL_Open",
+  key: "MODALOpen_STATE",
   default: false,
 });
 
 export const modalOverlayState = atom<boolean>({
-  key: "MODAL_Overlay",
+  key: "MODALOverlay_STATE",
   default: true,
 });
