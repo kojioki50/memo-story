@@ -4,7 +4,6 @@ import { PrimaryButton } from "../Button/PrimaryButton";
 import { memoRegister } from "../../hooks/memoRegister";
 import {
   Box,
-  Button,
   Checkbox,
   Flex,
   Heading,
@@ -62,14 +61,13 @@ export const RegisterMemo: VFC = memo(() => {
         <Stack bg="#0363A8" spacing={5}>
           <Heading pt={3} ml={3} fontSize={{ base: "28px", md: "32px" }}>
             RegisterMemo
-            <Button
+            <PrimaryButton
               disabled={(load && true) || backBtn}
               onClick={onClickOut}
-              fontSize={{ base: "8px", sm: "12px" }}
-              ml={6}
+              ml="6"
             >
               ログアウト
-            </Button>
+            </PrimaryButton>
           </Heading>
           <Box pb="10" bg="skyblue">
             <Box
@@ -77,7 +75,7 @@ export const RegisterMemo: VFC = memo(() => {
               pt="2"
               ml="3"
               mt="3"
-              mb={2}
+              mb={5}
             >
               タイトル
             </Box>
@@ -87,13 +85,14 @@ export const RegisterMemo: VFC = memo(() => {
               placeholder="title"
               value={title}
               onChange={titleChange}
+              h="1.75rem"
             />
             <Box
               fontSize={{ base: "16px", md: "20px" }}
               pt="2"
               ml="3"
               mt="3"
-              mb={2}
+              mb={5}
             >
               カテゴリー
             </Box>
@@ -102,7 +101,7 @@ export const RegisterMemo: VFC = memo(() => {
                 <Radio
                   isDisabled={(load && true) || backBtn}
                   colorScheme="green"
-                  size="md"
+                  size="lg"
                   ml={3}
                   value="噂話"
                 >
@@ -111,7 +110,7 @@ export const RegisterMemo: VFC = memo(() => {
                 <Radio
                   isDisabled={(load && true) || backBtn}
                   colorScheme="green"
-                  size="md"
+                  size="lg"
                   value="悪口"
                 >
                   悪口
@@ -123,7 +122,7 @@ export const RegisterMemo: VFC = memo(() => {
               mt="3"
               pt="2"
               ml="3"
-              mb={2}
+              mb={5}
             >
               内容
             </Box>
@@ -139,37 +138,40 @@ export const RegisterMemo: VFC = memo(() => {
               pt="2"
               ml="3"
               mt="3"
-              mb={2}
+              mb={5}
             >
               日付
             </Box>
             <Input
               disabled={(load && true) || backBtn}
               fontSize={{ base: "16px", md: "20px" }}
-              pr="50%"
+              pl="10%"
               type="date"
               value={date}
               onChange={onChangeDate}
+              h="1.75rem"
             />
             <Box
               fontSize={{ base: "16px", md: "20px" }}
               pt="2"
               ml="3"
               mt="3"
-              mb={2}
+              mb={5}
             >
-              チェック未完了or完了(0:未完了、1:完了)
+              チェック(0:未完了、1:完了)
             </Box>
 
             <Checkbox
               isDisabled={(load && true) || backBtn}
-              ml="3"
+              ml="5"
               isChecked={mark}
               onChange={onClick}
             >
-              チェック未完了or完了
+              チェック
             </Checkbox>
             <PrimaryButton
+              ml="10px"
+              height="10px"
               disabled={(backBtn && true) || load}
               loading={load}
               onClick={onClickRegister}
@@ -180,6 +182,7 @@ export const RegisterMemo: VFC = memo(() => {
               onClick={onClickBack}
               loading={backBtn}
               disabled={(load && true) || backBtn}
+              ml="10px"
             >
               戻る
             </BackButton>

@@ -7,20 +7,24 @@ type Props = {
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
+  ml?: string
+  height?: string
 };
 
 export const PrimaryButton: VFC<Props> = memo((props) => {
-  const { children, onClick, disabled = false, loading = false } = props;
+  const {height, ml,children, onClick, disabled = false, loading = false } = props;
   return (
     <>
       <Button
-        ml={3}
-        mt={5}
-        fontSize={16}
-        p={3}
+        ml={ml}
+        // mt={5}
+        // fontSize={16}
+        // p={3}
+        p={10}
+        height={height}
         _hover={{
           background: "white",
-          color: "teal.500",
+          color: "teal",
         }}
         color="#fff"
         bg="#1F0FF5"

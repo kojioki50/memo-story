@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import React, { ChangeEventHandler, useState, VFC } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { PrimaryButton } from "../Button/PrimaryButton";
+// import { MemoCard } from "./MemoCard";
 
 export const Login: VFC = () => {
   const [show, setShow] = React.useState(false);
@@ -29,16 +31,18 @@ export const Login: VFC = () => {
   };
   return (
     <>
+      {/* <MemoCard /> */}
       <Flex align="center" justify="center" height="100vh">
         <Box>
-          <Heading ml="25%" mb="5">
+          <Heading ml="35%" mb="5">
             ログイン
           </Heading>
           <Input
             mb="5"
+            h="1.75rem"
             focusBorderColor="teal.500"
             errorBorderColor="crimson"
-            size="md"
+            
             onChange={textChange}
             value={textInput}
             placeholder="ユーザーID"
@@ -47,42 +51,39 @@ export const Login: VFC = () => {
             <Input
               focusBorderColor="teal.500"
               errorBorderColor="crimson"
-              size="md"
+              h="1.75rem"
+              
               type={show ? "text" : "password"}
               onChange={passChange}
               value={pass}
               placeholder="パスワード"
             />
-            <InputRightElement width="4.5rem">
+            <InputRightElement  width="4.5rem">
               <Button
                 bg="skyblue"
                 color="#fff"
                 _hover={{
                   background: "white",
-                  color: "teal.500",
+                  color: "teal",
                 }}
                 h="1.75rem"
                 size="sm"
+                mt={15}
+                ml={30}
                 onClick={handleClick}
               >
                 {show ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
           </InputGroup>
-          <Button
-            isLoading={loading}
-            _hover={{
-              background: "white",
-              color: "teal.500",
-            }}
-            color="#fff"
-            bg="#1F0FF5"
-            opacity=".8"
+          <PrimaryButton
+            loading={loading}
+            height="1.75rem"
             ml="35%"
             onClick={onClickLogin}
           >
             Login
-          </Button>
+          </PrimaryButton>
         </Box>
       </Flex>
     </>

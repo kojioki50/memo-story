@@ -1,8 +1,10 @@
 import React, { VFC } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Mock } from "../components/pages/Mock";
 
 import { Login } from "../components/pages/Login";
-import { Memo } from "../components/pages/Memo";
+
+
 import { Page404 } from "../components/pages/Page404";
 import { RegisterMemo } from "../components/pages/RegisterMemo";
 import { AuthenticatedGuard } from "./AuthenticatedGuard";
@@ -15,14 +17,6 @@ export const Router: VFC = () => {
 
       <Route path="memo">
         <Route
-          path=""
-          element={
-            <AuthenticatedGuard>
-              <Memo loading />
-            </AuthenticatedGuard>
-          }
-        />
-        <Route
           path="register"
           element={
             <AuthenticatedGuard>
@@ -31,6 +25,7 @@ export const Router: VFC = () => {
           }
         />
       </Route>
+      <Route path="all" element={<Mock />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );

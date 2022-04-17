@@ -1,21 +1,23 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
-  extends: ["plugin:react/recommended", "standard", "prettier"],
+  extends: ["plugin:react/recommended", "standard", "prettier", "plugin:storybook/recommended"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: "latest",
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
     "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [1, {
+      extensions: [".ts", ".tsx"]
+    }],
     "react/button-has-type": 0,
     "no-console": 0,
     "react/react-in-jsx-scope": 0,
@@ -30,6 +32,6 @@ module.exports = {
     "react/jsx-props-no-spreading": 0,
     "react/prop-types": 0,
     "react/destructuring-assignment": 0,
-    "react/display-name": 0,
-  },
+    "react/display-name": 0
+  }
 };
