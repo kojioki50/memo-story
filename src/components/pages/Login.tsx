@@ -8,7 +8,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import React, { ChangeEventHandler, useState, VFC } from "react";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../Button/PrimaryButton";
 // import { MemoCard } from "./MemoCard";
 
@@ -24,17 +24,17 @@ export const Login: VFC = () => {
   const passChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPass(e.target.value);
   };
-  const { login, loading } = useAuth();
+  // const { login } = useAuth();
 
-  const onClickLogin = () => {
-    login(textInput, pass);
-  };
+  // const onClickLogin = () => {
+  //   login(textInput, pass);
+  // };
   return (
     <>
       {/* <MemoCard /> */}
-      <Flex align="center" justify="center" height="100vh">
+      <Flex align="center" justify="center">
         <Box>
-          <Heading ml="35%" mb="5">
+          <Heading ml="35%" mb="20">
             ログイン
           </Heading>
           <Input
@@ -52,7 +52,7 @@ export const Login: VFC = () => {
               focusBorderColor="teal.500"
               errorBorderColor="crimson"
               h="1.75rem"
-              
+              mb={20}
               type={show ? "text" : "password"}
               onChange={passChange}
               value={pass}
@@ -77,10 +77,10 @@ export const Login: VFC = () => {
             </InputRightElement>
           </InputGroup>
           <PrimaryButton
-            loading={loading}
+            // loading={loading}
             height="1.75rem"
             ml="35%"
-            onClick={onClickLogin}
+            // onClick={onClickLogin}
           >
             Login
           </PrimaryButton>

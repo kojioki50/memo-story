@@ -1,7 +1,7 @@
 import { ChangeEventHandler, memo, useState, VFC } from "react";
 import { BackButton } from "../Button/BackButton";
 import { PrimaryButton } from "../Button/PrimaryButton";
-import { memoRegister } from "../../hooks/memoRegister";
+// import { memoRegister } from "../../hooks/memoRegister";
 import {
   Box,
   Checkbox,
@@ -21,7 +21,7 @@ export const RegisterMemo: VFC = memo(() => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [backBtn, setBackbtn] = useState(false);
+  // const [backBtn, setBackbtn] = useState(false);
 
   const titleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setTitle(e.target.value);
@@ -34,16 +34,16 @@ export const RegisterMemo: VFC = memo(() => {
     setDate(e.target.value);
   };
 
-  const { registerInfo, load } = memoRegister();
-  const onClickRegister = () => {
-    registerInfo(title, category, description, date, mark);
-  };
+  // const { registerInfo } = memoRegister();
+  // const onClickRegister = () => {
+  //   registerInfo(title, category, description, date, mark);
+  // };
 
   const navigate = useNavigate();
-  const onClickBack = () => {
-    setBackbtn(true);
-    navigate(-1);
-  };
+  // const onClickBack = () => {
+  //   setBackbtn(true);
+  //   navigate(-1);
+  // };
 
   const onClick = () => {
     setMark(!mark);
@@ -62,7 +62,7 @@ export const RegisterMemo: VFC = memo(() => {
           <Heading pt={3} ml={3} fontSize={{ base: "28px", md: "32px" }}>
             RegisterMemo
             <PrimaryButton
-              disabled={(load && true) || backBtn}
+              // disabled={(load && true) || backBtn}
               onClick={onClickOut}
               ml="6"
             >
@@ -80,7 +80,7 @@ export const RegisterMemo: VFC = memo(() => {
               タイトル
             </Box>
             <Input
-              disabled={(load && true) || backBtn}
+              // disabled={(load && true) || backBtn}
               fontSize={{ base: "16px", md: "20px" }}
               placeholder="title"
               value={title}
@@ -99,7 +99,7 @@ export const RegisterMemo: VFC = memo(() => {
             <RadioGroup onChange={setCategory} value={category}>
               <Stack direction="row">
                 <Radio
-                  isDisabled={(load && true) || backBtn}
+                  // isDisabled={(load && true) || backBtn}
                   colorScheme="green"
                   size="lg"
                   ml={3}
@@ -108,7 +108,7 @@ export const RegisterMemo: VFC = memo(() => {
                   噂話
                 </Radio>
                 <Radio
-                  isDisabled={(load && true) || backBtn}
+                  // isDisabled={(load && true) || backBtn}
                   colorScheme="green"
                   size="lg"
                   value="悪口"
@@ -127,7 +127,7 @@ export const RegisterMemo: VFC = memo(() => {
               内容
             </Box>
             <Textarea
-              disabled={(load && true) || backBtn}
+              // disabled={(load && true) || backBtn}
               fontSize={{ base: "16px", md: "20px" }}
               value={description}
               onChange={textChange}
@@ -143,7 +143,7 @@ export const RegisterMemo: VFC = memo(() => {
               日付
             </Box>
             <Input
-              disabled={(load && true) || backBtn}
+              // disabled={(load && true) || backBtn}
               fontSize={{ base: "16px", md: "20px" }}
               pl="10%"
               type="date"
@@ -162,7 +162,7 @@ export const RegisterMemo: VFC = memo(() => {
             </Box>
 
             <Checkbox
-              isDisabled={(load && true) || backBtn}
+              // isDisabled={(load && true) || backBtn}
               ml="5"
               isChecked={mark}
               onChange={onClick}
@@ -172,16 +172,16 @@ export const RegisterMemo: VFC = memo(() => {
             <PrimaryButton
               ml="10px"
               height="10px"
-              disabled={(backBtn && true) || load}
-              loading={load}
-              onClick={onClickRegister}
+              // disabled={(backBtn && true) || load}
+              // loading={load}
+              // onClick={onClickRegister}
             >
               登録
             </PrimaryButton>
             <BackButton
-              onClick={onClickBack}
-              loading={backBtn}
-              disabled={(load && true) || backBtn}
+              // onClick={onClickBack}
+              // loading={backBtn}
+              // disabled={(load && true) || backBtn}
               ml="10px"
             >
               戻る

@@ -26,3 +26,23 @@ const withChakra = (StoryFn: Function) => {
 };
 
 export const decorators = [withChakra,mswDecorator];
+
+export const parameters = {
+  backgrounds: {
+    default: "default",
+    values: [
+      {
+        name: "default",
+        value: "#fff",
+      },
+      {
+        name: "skyblue",
+        value: "#00aced",
+      },
+      {
+        name: "blue",
+        value: "#3b5998",
+      },
+    ],
+  },
+};
