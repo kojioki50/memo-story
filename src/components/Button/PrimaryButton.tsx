@@ -7,12 +7,19 @@ type Props = {
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
-  ml?: string
-  height?: string
+  ml?: string;
+  height?: string;
 };
 
 export const PrimaryButton: VFC<Props> = memo((props) => {
-  const {height, ml,children, onClick, disabled = false, loading = false } = props;
+  const {
+    height,
+    ml,
+    children,
+    onClick,
+    disabled = false,
+    loading = false,
+  } = props;
   return (
     <>
       <Button
@@ -20,7 +27,7 @@ export const PrimaryButton: VFC<Props> = memo((props) => {
         // mt={5}
         // fontSize={16}
         // p={3}
-        p={10}
+        p={3}
         height={height}
         _hover={{
           background: "white",

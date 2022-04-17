@@ -1,8 +1,8 @@
 // MyComponent.story.ts|tsx
 // import React from "react";
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
-import { Login } from '../components/pages/Login';
+import { Login } from "../components/pages/Login";
 
 export default {
   title: "Example/Login",
@@ -20,8 +20,8 @@ export default {
   ],
 } as ComponentMeta<typeof Login>;
 
-export const Basic: ComponentStory<typeof Login> = (args) => 
+export const Basic: ComponentStory<typeof Login> = (args) => (
   <BrowserRouter>
-   <Login {...args} ></Login>
+    <Login {...args}></Login>
   </BrowserRouter>
-
+);

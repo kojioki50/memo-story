@@ -13,7 +13,6 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
 export const RegisterMemo: VFC = memo(() => {
   const [mark, setMark] = useState(false);
@@ -39,7 +38,6 @@ export const RegisterMemo: VFC = memo(() => {
   //   registerInfo(title, category, description, date, mark);
   // };
 
-  const navigate = useNavigate();
   // const onClickBack = () => {
   //   setBackbtn(true);
   //   navigate(-1);
@@ -47,12 +45,6 @@ export const RegisterMemo: VFC = memo(() => {
 
   const onClick = () => {
     setMark(!mark);
-  };
-
-  const onClickOut = () => {
-    localStorage.removeItem("key");
-    localStorage.removeItem("auth");
-    navigate("/");
   };
 
   return (
@@ -63,7 +55,6 @@ export const RegisterMemo: VFC = memo(() => {
             RegisterMemo
             <PrimaryButton
               // disabled={(load && true) || backBtn}
-              onClick={onClickOut}
               ml="6"
             >
               ログアウト
@@ -170,8 +161,7 @@ export const RegisterMemo: VFC = memo(() => {
               チェック
             </Checkbox>
             <PrimaryButton
-              ml="10px"
-              height="10px"
+              ml="20"
               // disabled={(backBtn && true) || load}
               // loading={load}
               // onClick={onClickRegister}

@@ -34,7 +34,7 @@ export const Login: VFC = () => {
       {/* <MemoCard /> */}
       <Flex align="center" justify="center">
         <Box>
-          <Heading ml="35%" mb="20">
+          <Heading ml="20%" mb="10">
             ログイン
           </Heading>
           <Input
@@ -42,7 +42,6 @@ export const Login: VFC = () => {
             h="1.75rem"
             focusBorderColor="teal.500"
             errorBorderColor="crimson"
-            
             onChange={textChange}
             value={textInput}
             placeholder="ユーザーID"
@@ -52,13 +51,13 @@ export const Login: VFC = () => {
               focusBorderColor="teal.500"
               errorBorderColor="crimson"
               h="1.75rem"
-              mb={20}
+              mb={2}
               type={show ? "text" : "password"}
               onChange={passChange}
               value={pass}
               placeholder="パスワード"
             />
-            <InputRightElement  width="4.5rem">
+            <InputRightElement width="4.5rem">
               <Button
                 bg="skyblue"
                 color="#fff"
@@ -68,7 +67,7 @@ export const Login: VFC = () => {
                 }}
                 h="1.75rem"
                 size="sm"
-                mt={15}
+                mb={3}
                 ml={30}
                 onClick={handleClick}
               >

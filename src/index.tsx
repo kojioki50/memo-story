@@ -20,13 +20,10 @@ import reportWebVitals from "./reportWebVitals";
 //   </BrowserRouter>
 // );
 
-
-
 ReactDOM.render(
-
   <React.StrictMode>
     <App />
-    </React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
@@ -34,4 +31,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-

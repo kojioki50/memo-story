@@ -1,8 +1,8 @@
 // MyComponent.story.ts|tsx
 // import React from "react";
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
-import { RegisterMemo } from '../components/pages/RegisterMemo';
+import { RegisterMemo } from "../components/pages/RegisterMemo";
 
 export default {
   title: "Example/RegisterMemo",
@@ -16,5 +16,8 @@ export default {
   ],
 } as ComponentMeta<typeof RegisterMemo>;
 
-export const Basic: ComponentStory<typeof RegisterMemo> = (args) => 
-<BrowserRouter><RegisterMemo {...args} ></RegisterMemo></BrowserRouter>;
+export const Basic: ComponentStory<typeof RegisterMemo> = (args) => (
+  <BrowserRouter>
+    <RegisterMemo {...args}></RegisterMemo>
+  </BrowserRouter>
+);

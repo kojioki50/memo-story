@@ -4,7 +4,6 @@ import { Mock } from "../components/pages/Mock";
 
 import { Login } from "../components/pages/Login";
 
-
 import { Page404 } from "../components/pages/Page404";
 import { RegisterMemo } from "../components/pages/RegisterMemo";
 import { AuthenticatedGuard } from "./AuthenticatedGuard";

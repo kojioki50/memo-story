@@ -2,7 +2,6 @@
 import { Button } from "@chakra-ui/react";
 import { memo, ReactNode, VFC } from "react";
 
-
 type Props = {
   children: ReactNode;
   onClick?: () => void;
@@ -21,7 +20,7 @@ export const BackButton: VFC<Props> = memo((props) => {
     onClick,
     backgroundColor,
     height,
-    ml
+    ml,
   } = props;
 
   return (
@@ -34,7 +33,7 @@ export const BackButton: VFC<Props> = memo((props) => {
         // fontSize={16}
         // p={3}
         h={height}
-        p={10}
+        p={3}
         color="#fff"
         border="none"
         bg="tomato"
