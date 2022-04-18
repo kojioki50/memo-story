@@ -38,7 +38,7 @@ Basic.parameters = {
           ctx.json({
             id: "5",
             title: "今日の出来事",
-            category: "噂話",
+            category: "悪口",
             description: "今日は〇〇でした",
             date: "2022/02/22",
             mark_div: true,
